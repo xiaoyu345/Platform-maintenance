@@ -2,59 +2,88 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>维护升级中</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <title>璀璨源泉 APP 下载</title>
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #4b6cb7, #182848);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
+      background: #f5f7fa;
+      color: #333;
       text-align: center;
     }
-
     .container {
-      max-width: 600px;
-      padding: 20px;
+      padding: 2em;
     }
-
-    .icon {
-      font-size: 80px;
-      margin-bottom: 20px;
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 24px;
+      margin-bottom: 1em;
     }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+    h1 { font-size: 1.8em; margin-bottom: 0.2em; }
+    .version { color: #888; margin-bottom: 2em; }
+    .btn {
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      margin: 1em auto;
+      padding: 1em;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      background: #4e54c8;
+      color: #fff;
+      text-decoration: none;
     }
-
-    p {
-      font-size: 18px;
-      opacity: 0.9;
+    .tip {
+      margin-top: 2em;
+      font-size: 0.95em;
+      color: #666;
     }
-
-    .footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.5);
+    #weixin-tip {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      z-index: 999;
+      text-align: center;
+      padding-top: 30%;
+      font-size: 1.2em;
     }
   </style>
 </head>
 <body>
+  <div id="weixin-tip">请点击右上角<br>选择“在浏览器中打开”</div>
   <div class="container">
-    <div class="icon">🔧</div>
-    <h1>平台维护升级中</h1>
-    <p>我们正在进行系统升级维护，预计 <strong>1 小时</strong> 后恢复服务。</p>
-    <p>给您带来的不便敬请谅解，感谢您的理解与支持！</p>
+    <img class="logo" src="https://cdn.xn--ohqr25am2fnst.site/logo.png" alt="logo">
+    <h1>璀璨源泉</h1>
+    <div class="version">版本号：v1.0.0</div>
+    <a id="androidBtn" class="btn" style="display:none" href="https://cdn.xn--ohqr25am2fnst.site/app-release.apk">下载 Android 版本</a>
+    <a id="iosBtn" class="btn" style="display:none" href="itms-services://?action=download-manifest&url=https://cdn.xn--ohqr25am2fnst.site/ios/manifest.plist">安装 iOS 版本</a>
+    <div class="tip">📢 请使用系统浏览器打开并收藏本页面</div>
   </div>
-  <div class="footer">
-    &copy; 2025 璀璨源泉. All rights reserved.
-  </div>
+
+  <script>
+    // 判断是否微信/QQ 内置浏览器及系统平台
+    var ua = navigator.userAgent.toLowerCase();
+    var isWeixin = ua.indexOf('micromessenger') !== -1 || ua.indexOf('qq') !== -1;
+    var isAndroid = ua.indexOf('android') > -1;
+    var isIOS = /iphone|ipad|ipod/.test(ua);
+
+    if (isAndroid) document.getElementById('androidBtn').style.display = 'block';
+    if (isIOS) document.getElementById('iosBtn').style.display = 'block';
+
+    if (isWeixin) {
+      document.getElementById('weixin-tip').style.display = 'block';
+      document.querySelector('.container').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
